@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <rect width="36" height="36" x="2" y="2" rx="8" fill="#0ea5e9"/>
+  <text x="20" y="26" font-family="Georgia,serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">F</text>
+  <text x="50" y="27" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1e293b">Forex</text>
+  <text x="107" y="27" font-family="Georgia,serif" font-size="22" font-weight="400" fill="#0ea5e9">Guru</text>
+  <circle cx="148" cy="10" r="4" fill="#22c55e"/>
+</svg>

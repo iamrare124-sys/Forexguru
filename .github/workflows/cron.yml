@@ -1,0 +1,28 @@
+name: Auto Publish Posts
+
+on:
+  schedule:
+    - cron: '30 0 * * *'   # 6:00 AM IST
+    - cron: '30 3 * * *'   # 9:00 AM IST
+    - cron: '30 6 * * *'   # 12:00 PM IST
+    - cron: '30 9 * * *'   # 3:00 PM IST
+    - cron: '30 12 * * *'  # 6:00 PM IST
+    - cron: '30 15 * * *'  # 9:00 PM IST
+  workflow_dispatch:        # Manual trigger from GitHub UI bhi
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Cron
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            "${{ secrets.SITE_URL }}/api/cron")
+          echo "Response: $response"
+          if [ "$response" != "200" ]; then
+            echo "Cron failed with status $response"
+            exit 1
+          fi
+          echo "Post published successfully"
