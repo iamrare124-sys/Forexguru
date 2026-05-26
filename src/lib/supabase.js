@@ -54,10 +54,12 @@ async function enforcePostLimit() {
 
 // ── Get posts ──────────────────────────────────────────────
 export async function getPosts({ limit = 12, offset = 0, category = null } = {}) {
-  let query = supabase
-    .from('posts')
-    .select('id, slug, title, excerpt, category, tags, cover_image, cover_image_alt, author_name, reading_time, created_at')
-    .eq('published', true)
+  const siteName = process.env.SITE_NAME || 'forexguru'
+   let query = getSupabase()
+  .from('posts')
+  .select('...')
+  .eq('site_name', siteName)   // ← yeh line add karo
+  .eq('published', true)
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1)
 
@@ -108,11 +110,22 @@ export async function savePost(postData) {
     .insert(postData)
     .select()
     .single()
+
   if (error) throw error
+
   // Auto-delete old posts after saving
   await enforcePostLimit()
+
   return data
 }
+
+// Usage
+const saved = await savePost({
+  site_name: process.env.SITE_NAME || 'forexguru',
+  slug,
+  title: generated.title,
+  // ... baaki fields same
+})
 
 export async function postExists(sourceUrl) {
   if (!sourceUrl) return false
