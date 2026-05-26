@@ -119,14 +119,6 @@ export async function savePost(postData) {
   return data
 }
 
-// Usage
-const saved = await savePost({
-  site_name: process.env.SITE_NAME || 'forexguru',
-  slug,
-  title: generated.title,
-  // ... baaki fields same
-})
-
 export async function postExists(sourceUrl) {
   if (!sourceUrl) return false
   try {
