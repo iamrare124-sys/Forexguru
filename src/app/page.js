@@ -1,5 +1,5 @@
 import { nicheConfig } from '@/config/site.config'
-export const revalidate = 300
+export const revalidate = 0
 
 async function getData() {
   try {
