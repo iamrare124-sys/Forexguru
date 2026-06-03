@@ -86,11 +86,7 @@ export async function getTrendingPosts(limit = 5) {
 }
 
 export async function savePost(postData) {
-  // Always attach site_name
-  const dataWithSite = {
-    ...postData,
-    site_name: getSiteName(),
-  }
+  const dataWithSite = { ...postData, site_name: getSiteName() }
   const { data, error } = await getSupabaseAdmin()
     .from('posts')
     .insert(dataWithSite)
